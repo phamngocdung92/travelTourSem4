@@ -1,4 +1,4 @@
 package Sem4.TravelTour.repository.CartRepository;
 
-public interface ICartRepository {
+public class CartRepositoryImpl {
 }

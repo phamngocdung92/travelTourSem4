@@ -1,4 +1,4 @@
 package Sem4.TravelTour.repository.NotificationRepository;
 
-public class NotificationRepository {
+public interface NotificationRepository {
 }

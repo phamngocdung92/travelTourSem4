@@ -1,4 +1,4 @@
 package Sem4.TravelTour.repository.BookRepository;
 
-public interface IBookRepository {
+public class BookRepositoryImpl {
 }

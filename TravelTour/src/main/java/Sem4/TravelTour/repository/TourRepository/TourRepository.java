@@ -1,4 +1,4 @@
 package Sem4.TravelTour.repository.TourRepository;
 
-public class TourRepository {
+public interface TourRepository {
 }
