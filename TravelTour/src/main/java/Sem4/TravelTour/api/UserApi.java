@@ -54,9 +54,9 @@ public class UserApi {
         if(userService.exsitsByEmail(user.getEmail())){
             return ResponseEntity.notFound().build();
         }
-        if(userService.existsById(user.getUserId())){
-            return ResponseEntity.badRequest().build();
-        }
+//        if(userService.existsById(user.getUserId())){
+//            return ResponseEntity.badRequest().build();
+//        }
         Set<AppRole> roles = new HashSet<>();
         roles.add(new AppRole(1, null)); //1 is user 2 is admin
         user.setRoles(roles);
