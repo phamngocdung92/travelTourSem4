@@ -56,7 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("api/auth/email/**",
                         "api/auth/signin/**",
-                        "api/auth/send-mail-forgot-password-token")
+                        "api/auth/send-mail-forgot-password-token",
+                        "forgot-password" )
                 .permitAll();
 
         http.authorizeRequests().antMatchers("api/auth/**").access("hasRole('ROLE_ADMIN')");
