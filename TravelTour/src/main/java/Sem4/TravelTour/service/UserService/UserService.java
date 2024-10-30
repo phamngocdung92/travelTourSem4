@@ -12,5 +12,6 @@ public interface UserService {
     boolean exsitsByEmail(String email);
     Optional<User> findByEmail(String email);
     User save(User user);
+    User findByToken(String token);
 
 }
