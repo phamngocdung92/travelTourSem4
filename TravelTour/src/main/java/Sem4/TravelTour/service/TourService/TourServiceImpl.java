@@ -37,4 +37,8 @@ public class TourServiceImpl implements TourService {
     public Optional<Tour> findById(Long id) {
         return tourRepository.findById(id);
     }
+    @Override
+    public Tour getById(Long id) {
+        return tourRepository.getById(id);
+    }
 }

@@ -5,8 +5,7 @@ import Sem4.TravelTour.entity.CartDetail;
 
 import java.util.List;
 
-public interface CartService {
-    Cart save(Cart cart);
-    boolean existsById(Long id);
-
+public interface CartDetailService {
+    void delete (CartDetail cartDetail);
+    List<CartDetail> findByCart(Cart cart);
 }

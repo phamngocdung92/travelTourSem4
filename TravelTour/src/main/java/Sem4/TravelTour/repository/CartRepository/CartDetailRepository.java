@@ -8,8 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Long> {
-    Cart save(Cart cart);
-    boolean existsById(Long id);
-
+public interface CartDetailRepository extends JpaRepository<CartDetail, Long> {
+    CartDetail save (CartDetail cartDetail);
+    List<CartDetail> findByCart(Cart cart);
 }
