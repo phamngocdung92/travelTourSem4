@@ -45,6 +45,9 @@ public class TourServiceImpl implements TourService {
     public Tour findByTourIdAndStatusTrue(Long id) {return  tourRepository.findByTourIdAndStatusTrue(id);}
     @Override
     public List<Tour> findByStatusTrueOrderByQuantityDesc() {return tourRepository.findByStatusTrueOrderByQuantityDesc();}
-
+    @Override
+    public Tour getById(Long id) {
+        return tourRepository.getById(id);
+    }
 
 }

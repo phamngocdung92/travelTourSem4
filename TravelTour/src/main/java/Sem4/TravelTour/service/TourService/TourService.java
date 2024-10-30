@@ -16,4 +16,5 @@ public interface TourService {
     List<Tour> findByStatusTrue();
     Tour findByTourIdAndStatusTrue(Long id);
     List<Tour> findByStatusTrueOrderByQuantityDesc();
+    Tour getById(Long id);
 }

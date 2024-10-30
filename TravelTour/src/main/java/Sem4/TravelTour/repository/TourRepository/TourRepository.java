@@ -20,4 +20,5 @@ public interface TourRepository extends JpaRepository<Tour, Long>
     Optional<Tour> findById(Long id);
     Tour findByTourIdAndStatusTrue(Long id);
     List<Tour> findByStatusTrueOrderByQuantityDesc();//findByStatusTrueOrderByQuantityDesc()
+    Tour getById(Long id);
 }
