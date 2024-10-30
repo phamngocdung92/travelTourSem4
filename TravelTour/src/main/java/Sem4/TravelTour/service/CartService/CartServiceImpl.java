@@ -23,8 +23,5 @@ public class CartServiceImpl implements CartService {
     public boolean existsById(Long id) {
         return cartRepository.existsById(id);
     }
-    @Override
-    public List<CartDetail> findByCart(Cart cart) {
-        return cartRepository.findByCart(cart);
-    }
+
 }

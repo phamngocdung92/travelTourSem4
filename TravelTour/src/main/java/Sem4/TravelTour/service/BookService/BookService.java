@@ -10,7 +10,6 @@ public interface BookService {
     List<Book> findAllByOrderByBookIdDesc();
     boolean existsById(Long id);
     Optional<Book> findById(Long id);
-    boolean existsByEmail(String email);
     List<Book> findByUserOrderByBookIdDesc(User user);
     Book save(Book book);
 }

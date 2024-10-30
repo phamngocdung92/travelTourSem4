@@ -8,5 +8,5 @@ import java.util.List;
 public interface CartService {
     Cart save(Cart cart);
     boolean existsById(Long id);
-    List<CartDetail> findByCart(Cart cart);
+
 }

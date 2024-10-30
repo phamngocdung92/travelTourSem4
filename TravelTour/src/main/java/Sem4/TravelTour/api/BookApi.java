@@ -47,7 +47,7 @@ public class BookApi {
     }
     @GetMapping("/user/{email}")
     public ResponseEntity<List<Book>> getByUser(@PathVariable("email") String email){
-        if(!bookService.existsByEmail(email)){
+        if(!userService.exsitsByEmail(email)){
             return ResponseEntity.notFound().build();
         }
         User user = userService.findByEmail(email).get();
@@ -55,7 +55,7 @@ public class BookApi {
                 bookService.findByUserOrderByBookIdDesc(user)
         );
     }
-    @PostMapping("/{email}+{startDate}+{endDate}}")
+    @PostMapping("/{email}/{startDate}/{endDate}")
     public ResponseEntity<Book> checkout (@PathVariable("email") String email,
                                           @PathVariable("startDate") Date startDate ,
                                             @PathVariable("endDate") Date endDate,
@@ -66,7 +66,7 @@ public class BookApi {
         if(!cartService.existsById(cart.getCartId())){
             return ResponseEntity.notFound().build();
         }
-        List<CartDetail> items = cartService.findByCart(cart);
+        List<CartDetail> items = cartDetailService.findByCart(cart);
         Double amount = 0.0;
         for (CartDetail i : items){
             amount += i.getPrice();

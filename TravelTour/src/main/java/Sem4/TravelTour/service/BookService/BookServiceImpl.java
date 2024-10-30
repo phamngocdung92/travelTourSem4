@@ -28,10 +28,7 @@ public class BookServiceImpl implements BookService {
     public Optional<Book> findById(Long id) {
         return bookRepository.findById(id);
     }
-    @Override
-    public boolean existsByEmail(String email) {
-        return  bookRepository.existsByEmail(email);
-    }
+
     @Override
     public List<Book> findByUserOrderByBookIdDesc(User user) {
         return bookRepository.findByUserOrderByBookIdDesc(user);
