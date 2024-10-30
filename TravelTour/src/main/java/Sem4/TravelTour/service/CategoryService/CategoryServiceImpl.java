@@ -1,7 +1,6 @@
 package Sem4.TravelTour.service.CategoryService;
 
 import Sem4.TravelTour.entity.Category;
-import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.repository.CategoryRepository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

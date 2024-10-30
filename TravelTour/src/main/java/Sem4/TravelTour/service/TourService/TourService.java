@@ -13,5 +13,7 @@ public interface TourService {
     List<Tour> getBestSeller();
     List<Tour> getRate();
     Optional<Tour> findById(Long id);
-    //tesst
+    List<Tour> findByStatusTrue();
+    Tour findByTourIdAndStatusTrue(Long id);
+    List<Tour> findByStatusTrueOrderByQuantityDesc();
 }

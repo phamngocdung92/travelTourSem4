@@ -1,7 +1,6 @@
 package Sem4.TravelTour.service.CategoryService;
 
 import Sem4.TravelTour.entity.Category;
-import Sem4.TravelTour.entity.Tour;
 
 import java.util.List;
 import java.util.Optional;
