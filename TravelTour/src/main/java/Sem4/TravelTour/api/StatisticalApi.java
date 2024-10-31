@@ -56,8 +56,8 @@ public class StatisticalApi {
         return ResponseEntity.ok(statisticalService.getRevenueByYear(year));
     }
 
-    @GetMapping("/get-all-order-success")
-    public ResponseEntity<List<Book>> getAllOrderSuccess() {
+    @GetMapping("/get-all-book-success")
+    public ResponseEntity<List<Book>> getAllBookSuccess() {
         return ResponseEntity.ok(bookService.findByStatus(2));
     }
 
@@ -76,5 +76,9 @@ public class StatisticalApi {
     @GetMapping("/get-inventory")
     public ResponseEntity<List<Tour>> getInventory() {
         return ResponseEntity.ok(tourService.findByStatusTrueOrderByQuantityDesc());
+    }
+    @GetMapping("/countYear")
+    public ResponseEntity<List<Integer>> getYears() {
+        return ResponseEntity.ok(statisticalService.getYears());
     }
 }
