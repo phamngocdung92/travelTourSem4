@@ -1,5 +1,6 @@
 package Sem4.TravelTour.service.TourService;
 
+import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
 
 import java.util.List;
@@ -18,4 +19,5 @@ public interface TourService {
     List<Tour> findByStatusTrueOrderByQuantityDesc();
     Tour getById(Long id);
     List<Tour> findByNameAndDuration(String name,int duration);
+    List<Tour> findByCategory(Category category);
 }

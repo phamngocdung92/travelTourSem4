@@ -11,14 +11,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("api/orderDetail")
+@RequestMapping("api/bookDetail")
 public class BookDetailApi {
     @Autowired
     BookService bookService;
 
     @Autowired
     BookDetailService bookDetailService;
-    @GetMapping("/order/{id}")
+    @GetMapping("/book/{id}")
     public ResponseEntity<List<BookDetail>> getByOrder(@PathVariable("id") Long id) {
         if (!bookService.existsById(id)) {
             return ResponseEntity.notFound().build();

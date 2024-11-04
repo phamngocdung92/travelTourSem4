@@ -1,5 +1,6 @@
 package Sem4.TravelTour.service.TourService;
 
+import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.repository.TourRepository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,9 @@ public class TourServiceImpl implements TourService {
     @Override
     public List<Tour> findByNameAndDuration(String name, int duration) {
         return tourRepository.findByNameAndDuration(name,duration);
+    }
+    @Override
+    public List<Tour> findByCategory(Category category) {
+        return tourRepository.findByCategory(category);
     }
 }

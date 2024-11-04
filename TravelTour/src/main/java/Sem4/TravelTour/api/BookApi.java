@@ -9,6 +9,7 @@ import Sem4.TravelTour.service.TourService.TourService;
 import Sem4.TravelTour.service.UserService.UserService;
 import Sem4.TravelTour.utils.SendMailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -57,8 +58,8 @@ public class BookApi {
     }
     @PostMapping("/{email}/{startDate}/{endDate}")
     public ResponseEntity<Book> checkout (@PathVariable("email") String email,
-                                          @PathVariable("startDate") Date startDate ,
-                                            @PathVariable("endDate") Date endDate,
+                                          @PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                          @PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
                                           @RequestBody Cart cart){
         if(!userService.exsitsByEmail(email)){
             return ResponseEntity.notFound().build();

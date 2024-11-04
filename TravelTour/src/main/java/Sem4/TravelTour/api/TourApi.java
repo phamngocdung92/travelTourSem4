@@ -1,6 +1,8 @@
 package Sem4.TravelTour.api;
 
+import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
+import Sem4.TravelTour.service.CategoryService.CategoryService;
 import Sem4.TravelTour.service.TourService.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import java.util.List;
 public class TourApi {
     @Autowired
     private TourService tourService;
+    @Autowired
+    private CategoryService categoryService;
     @GetMapping
     public ResponseEntity<List<Tour>> getAll() {
         return ResponseEntity.ok(tourService.getAll());
@@ -64,5 +68,13 @@ public class TourApi {
     @GetMapping("search")
     public ResponseEntity<List<Tour>> search(@RequestParam("name") String name, @RequestParam("duration") int duration) {
         return ResponseEntity.ok(tourService.findByNameAndDuration(name, duration));
+    }
+    @GetMapping("category/{id}")
+    public ResponseEntity<List<Tour>> getByCategory(@PathVariable("id") Long id) {
+        if(!categoryService.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        Category c = categoryService.findById(id).get();
+        return ResponseEntity.ok(tourService.findByCategory(c));
     }
 }

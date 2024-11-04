@@ -1,5 +1,6 @@
 package Sem4.TravelTour.repository.TourRepository;
 
+import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,5 +25,6 @@ public interface TourRepository extends JpaRepository<Tour, Long>
     Tour getById(Long id);
     @Query("SELECT t FROM Tour t WHERE t.name LIKE %:name% AND t.duration = :duration")
     List<Tour> findByNameAndDuration(@Param("name") String name, @Param("duration") int duration);
+    List<Tour> findByCategory(Category category);
 
 }
