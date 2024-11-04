@@ -77,4 +77,8 @@ public class TourApi {
         Category c = categoryService.findById(id).get();
         return ResponseEntity.ok(tourService.findByCategory(c));
     }
+    @GetMapping("latest")
+    public ResponseEntity<List<Tour>> getLatest() {
+        return ResponseEntity.ok(tourService.findByStatusTrueOrderByEnteredDateDesc());
+    }
 }

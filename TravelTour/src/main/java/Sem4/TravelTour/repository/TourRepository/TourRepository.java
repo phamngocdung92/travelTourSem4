@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface TourRepository extends JpaRepository<Tour, Long>
 {
     List<Tour> findByStatusTrue();
-    @Query(value = "Select t.* From tour t \r\n"
+    @Query(value = "Select t.* From tours t \r\n"
             + "left join rates r on t.tour_id = r.tour_id\r\n"
             + "group by t.tour_id , t.name\r\n"
             + "Order by  avg(r.rating) desc, RAND()", nativeQuery = true)
@@ -26,5 +26,6 @@ public interface TourRepository extends JpaRepository<Tour, Long>
     @Query("SELECT t FROM Tour t WHERE t.name LIKE %:name% AND t.duration = :duration")
     List<Tour> findByNameAndDuration(@Param("name") String name, @Param("duration") int duration);
     List<Tour> findByCategory(Category category);
+    List<Tour> findByStatusTrueOrderByEnteredDateDesc();
 
 }

@@ -58,4 +58,8 @@ public class TourServiceImpl implements TourService {
     public List<Tour> findByCategory(Category category) {
         return tourRepository.findByCategory(category);
     }
+    @Override
+    public List<Tour> findByStatusTrueOrderByEnteredDateDesc() {
+        return tourRepository.findByStatusTrueOrderByEnteredDateDesc();
+    }
 }

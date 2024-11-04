@@ -1,7 +1,7 @@
 package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.repository.UserRepository.UserRepository;
-import Sem4.TravelTour.service.SendMailService.SendMailService;
+import Sem4.TravelTour.service.MailService.SendMailService;
 import Sem4.TravelTour.service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
