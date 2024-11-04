@@ -60,4 +60,9 @@ public class TourApi {
         tourService.save(t);
         return ResponseEntity.ok().build();
     }
+    //find tour by name and duration
+    @GetMapping("search")
+    public ResponseEntity<List<Tour>> search(@RequestParam("name") String name, @RequestParam("duration") int duration) {
+        return ResponseEntity.ok(tourService.findByNameAndDuration(name, duration));
+    }
 }

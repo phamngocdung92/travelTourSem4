@@ -17,4 +17,5 @@ public interface TourService {
     Tour findByTourIdAndStatusTrue(Long id);
     List<Tour> findByStatusTrueOrderByQuantityDesc();
     Tour getById(Long id);
+    List<Tour> findByNameAndDuration(String name,int duration);
 }

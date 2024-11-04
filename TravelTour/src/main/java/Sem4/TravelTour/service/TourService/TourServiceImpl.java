@@ -49,5 +49,8 @@ public class TourServiceImpl implements TourService {
     public Tour getById(Long id) {
         return tourRepository.getById(id);
     }
-
+    @Override
+    public List<Tour> findByNameAndDuration(String name, int duration) {
+        return tourRepository.findByNameAndDuration(name,duration);
+    }
 }
