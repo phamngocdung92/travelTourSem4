@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 @Data
@@ -20,4 +21,9 @@ public class Category implements Serializable {
     private Long categoryId;
     private String categoryName;
 
+//    @OneToMany(mappedBy = "category")
+//    private Set<Tour> tours;
+//
+//    @OneToMany(mappedBy = "category")
+//    private Set<Location> locations;
 }

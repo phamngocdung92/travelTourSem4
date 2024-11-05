@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 @SuppressWarnings("serial")
 @Data
@@ -31,8 +32,26 @@ public class Tour implements Serializable {
     private int sold;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_Id")
     private Category category;
+
+//    @OneToMany(mappedBy = "tour")
+//    private Set<Location> locations;
+//
+//    @OneToMany(mappedBy = "tour")
+//    private Set<TourStatus> tourStatuses;
+//
+//    @OneToMany(mappedBy = "tour")
+//    private Set<BookDetail> bookDetails;
+//
+//    @OneToMany(mappedBy = "tour")
+//    private Set<CartDetail> cartDetails;
+//
+//    @OneToMany(mappedBy = "tour")
+//    private Set<Favorite> favorites;
+//
+//    @OneToMany(mappedBy = "tour")
+//    private Set<Rate> rates;
 
     @Override
     public String toString() {
@@ -51,4 +70,23 @@ public class Tour implements Serializable {
                 ", category=" + category +
                 '}';
     }
+
+
+    //    @Override
+//    public String toString() {
+//        return "Tour{" +
+//                "tourId=" + tourId +
+//                ", name='" + name + '\'' +
+//                ", quantity=" + quantity +
+//                ", price=" + price +
+//                ", discount=" + discount +
+//                ", image='" + image + '\'' +
+//                ", description='" + description + '\'' +
+//                ", enteredDate=" + enteredDate +
+//                ", status=" + status +
+//                ", duration=" + duration +
+//                ", sold=" + sold +
+//                ", category=" + category +
+//                '}';
+//    }
 }
