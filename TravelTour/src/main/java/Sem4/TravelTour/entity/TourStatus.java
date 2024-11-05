@@ -10,13 +10,14 @@ public class TourStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long statusId;
-    private Long tour_id;
+    private Long tourId;
 
     private LocalDate fromDate;
     private LocalDate toDate;
     private Boolean status;
 
     // Getters and Setters
+
 
     public Long getStatusId() {
         return statusId;
@@ -26,12 +27,12 @@ public class TourStatus {
         this.statusId = statusId;
     }
 
-    public Long getTour_id() {
-        return tour_id;
+    public Long getTourId() {
+        return tourId;
     }
 
-    public void setTour_id(Long tour_id) {
-        this.tour_id = tour_id;
+    public void setTourId(Long tourId) {
+        this.tourId = tourId;
     }
 
     public LocalDate getFromDate() {
@@ -57,12 +58,13 @@ public class TourStatus {
     public void setStatus(Boolean status) {
         this.status = status;
     }
+    //toString
 
     @Override
     public String toString() {
         return "TourStatus{" +
                 "statusId=" + statusId +
-                ", tour_id=" + tour_id +
+                ", tourId=" + tourId +
                 ", fromDate=" + fromDate +
                 ", toDate=" + toDate +
                 ", status=" + status +

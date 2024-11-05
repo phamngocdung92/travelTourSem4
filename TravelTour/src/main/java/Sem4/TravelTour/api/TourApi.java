@@ -93,11 +93,19 @@ public class TourApi {
             return ResponseEntity.notFound().build();
         }
         TourStatus ts = new TourStatus();
-        ts.setTour_id(tourIdInput);
+        ts.setTourId(tourIdInput);
         ts.setFromDate(closeTourDto.getFromDate());
         ts.setToDate(closeTourDto.getToDate());
         ts.setStatus(false);
 
         return ResponseEntity.ok(tourStatusService.save(ts));
+    }
+    @GetMapping("getClosedTourById/{id}")
+    public ResponseEntity<List<TourStatus>> getClosedTourById(@PathVariable("id") Long id){
+        if(!tourStatusService.existsById(id)){
+            return ResponseEntity.notFound().build();
+        }
+        List<TourStatus> ts = tourStatusService.findBytourIdAndStatusFalse(id);
+        return ResponseEntity.ok(ts);
     }
 }
