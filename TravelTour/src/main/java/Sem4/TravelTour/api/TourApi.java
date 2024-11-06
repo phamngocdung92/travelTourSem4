@@ -2,9 +2,11 @@ package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.dto.CloseTourDto;
 import Sem4.TravelTour.entity.Category;
+import Sem4.TravelTour.entity.Image;
 import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.entity.TourStatus;
 import Sem4.TravelTour.service.CategoryService.CategoryService;
+import Sem4.TravelTour.service.ImageService.ImageService;
 import Sem4.TravelTour.service.TourService.TourService;
 import Sem4.TravelTour.service.TourService.TourStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin("*")
 @RestController
@@ -23,6 +26,9 @@ public class TourApi {
     private CategoryService categoryService;
     @Autowired
     private TourStatusService tourStatusService;
+    @Autowired
+    private ImageService imageService;
+
     @GetMapping
     public ResponseEntity<List<Tour>> getAll() {
         return ResponseEntity.ok(tourService.getAll());
@@ -108,4 +114,14 @@ public class TourApi {
         List<TourStatus> ts = tourStatusService.findBytourIdAndStatusFalse(id);
         return ResponseEntity.ok(ts);
     }
+    @GetMapping("getTourImages/{id}")
+    public ResponseEntity<List<String>> getTourImages(@PathVariable("id") Long id) {
+        if (!tourService.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        List<Image> images = imageService.findByTour_TourId(id);
+        List<String> imageUrls = images.stream().map(Image::getImageUrl).collect(Collectors.toList());
+        return ResponseEntity.ok(imageUrls);
+    }
+
 }
