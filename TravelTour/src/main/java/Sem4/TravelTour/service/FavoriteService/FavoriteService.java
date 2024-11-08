@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FavoriteService {
     List<Favorite> findByUser(User user);
-    Integer countByTours(Long id);
+    Integer countByTour(Long id);
     Favorite findByTourAndUser(Tour tour, User user);
     Favorite save(Favorite favorite);
     boolean existsById(Long id);

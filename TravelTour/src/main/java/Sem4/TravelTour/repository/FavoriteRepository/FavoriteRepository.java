@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
     List<Favorite> findByUser(User user);
-    Integer countByTours(Long id);
+    Integer countByTour(Long id);
     Favorite findByTourAndUser(Tour tour, User user);
     Favorite save(Favorite favorite);
     boolean existsById(Long id);
