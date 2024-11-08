@@ -23,7 +23,7 @@ public class CartDetail implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tourId")
-    private Tours tours;
+    private Tour tours;
 
     @ManyToOne
     @JoinColumn(name = "cartId")

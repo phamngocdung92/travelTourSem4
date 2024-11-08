@@ -1,7 +1,7 @@
 package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.entity.CartDetail;
-import Sem4.TravelTour.entity.Tours;
+import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.service.CartService.CartDetailService;
 import Sem4.TravelTour.service.CartService.CartService;
 import Sem4.TravelTour.service.TourService.TourService;
@@ -45,10 +45,10 @@ public class CartDetailApi {
         }
 
         boolean check = false;
-        List<Tours> listT = tourService.findByStatusTrue();
-        Tours tours = tourService.findByTourIdAndStatusTrue(detail.getTours().getTourId());
-        for (Tours t : listT) {
-            if (t.getTourId() == tours.getTourId()) {
+        List<Tour> listT = tourService.findByStatusTrue();
+        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTours().getTourId());
+        for (Tour t : listT) {
+            if (t.getTourId() == tour.getTourId()) {
                 check = true;
             }
         }

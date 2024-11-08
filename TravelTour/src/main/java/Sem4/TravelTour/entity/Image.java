@@ -23,7 +23,7 @@ public class Image {
     private String updatedAt;
     @ManyToOne
     @JoinColumn(name = "tour_id")
-    private Tours tours;
+    private Tour tour;
 
     //Getters and Setters
 
@@ -67,11 +67,11 @@ public class Image {
         this.updatedAt = updatedAt;
     }
 
-    public Tours getTour() {
-        return tours;
+    public Tour getTour() {
+        return tour;
     }
 
-    public void setTour(Tours tour) {
-        this.tours = tours;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 }

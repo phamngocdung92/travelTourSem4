@@ -25,6 +25,6 @@ public class Favorite implements Serializable {
 
     @ManyToOne()
     @JoinColumn(name = "tourId")
-    private Tours tours;
+    private Tour tour;
 
 }

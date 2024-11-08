@@ -29,7 +29,7 @@ public class Rate implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tourId")
-    private Tours tours;
+    private Tour tour;
 
     @OneToOne
     @JoinColumn(name = "bookDetailId")

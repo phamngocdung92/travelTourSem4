@@ -1,6 +1,6 @@
 package Sem4.TravelTour.repository.StatisticalRepository;
 
-import Sem4.TravelTour.entity.Tours;
+import Sem4.TravelTour.entity.Tour;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StatisticalRepository extends CrudRepository<Tours, Long> {
+public interface StatisticalRepository extends CrudRepository<Tour, Long> {
     @Query(value = "select sum(amount), month(book_date) from books where year(book_date) = ? and status = 2 group by month(book_date)", nativeQuery = true)
     List<Object[]> getMonthOfYear(int year);
 

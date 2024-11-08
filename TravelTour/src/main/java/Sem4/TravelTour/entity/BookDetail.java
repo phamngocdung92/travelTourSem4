@@ -26,7 +26,7 @@ public class BookDetail implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tourId")
-    private Tours tours;
+    private Tour tour;
 
     @ManyToOne
     @JoinColumn(name = "bookId")

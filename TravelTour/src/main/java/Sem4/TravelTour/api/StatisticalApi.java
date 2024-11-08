@@ -3,7 +3,7 @@ package Sem4.TravelTour.api;
 import Sem4.TravelTour.dto.CategoryBestSeller;
 import Sem4.TravelTour.dto.Statistical;
 import Sem4.TravelTour.entity.Book;
-import Sem4.TravelTour.entity.Tours;
+import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.service.BookService.BookService;
 import Sem4.TravelTour.service.StatisticalService.StatisticalService;
 import Sem4.TravelTour.service.TourService.TourService;
@@ -74,7 +74,7 @@ public class StatisticalApi {
     }
 
     @GetMapping("/get-inventory")
-    public ResponseEntity<List<Tours>> getInventory() {
+    public ResponseEntity<List<Tour>> getInventory() {
         return ResponseEntity.ok(tourService.findByStatusTrueOrderByQuantityDesc());
     }
     @GetMapping("/countYear")

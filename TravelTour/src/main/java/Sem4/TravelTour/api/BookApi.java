@@ -121,11 +121,11 @@ public class BookApi {
     public void updateTour(Book book){
         List<BookDetail> listBookDetail = bookDetailService.findByBook(book);
         for(BookDetail bookDetail: listBookDetail){
-            Tours tours = tourService.findById(bookDetail.getTours().getTourId()).get();
-            if(tours != null){
-                tours.setQuantity(tours.getQuantity() - bookDetail.getQuantity());
-                tours.setSold(tours.getSold() + bookDetail.getQuantity());
-                tourService.save(tours);
+            Tour tour = tourService.findById(bookDetail.getTour().getTourId()).get();
+            if(tour != null){
+                tour.setQuantity(tour.getQuantity() - bookDetail.getQuantity());
+                tour.setSold(tour.getSold() + bookDetail.getQuantity());
+                tourService.save(tour);
             }
         }
     }

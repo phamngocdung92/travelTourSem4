@@ -1,7 +1,7 @@
 package Sem4.TravelTour.service.FavoriteService;
 
 import Sem4.TravelTour.entity.Favorite;
-import Sem4.TravelTour.entity.Tours;
+import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.entity.User;
 import Sem4.TravelTour.repository.FavoriteRepository.FavoriteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,8 @@ public class FavoriteServiceImpl implements FavoriteService{
         return favoriteRepository.countByTours(id);
     }
     @Override
-    public Favorite findByTourAndUser(Tours tours, User user) {
-        return favoriteRepository.findByToursAndUser(tours, user);
+    public Favorite findByTourAndUser(Tour tour, User user) {
+        return favoriteRepository.findByTourAndUser(tour, user);
     }
     @Override
     public Favorite save(Favorite favorite) {
