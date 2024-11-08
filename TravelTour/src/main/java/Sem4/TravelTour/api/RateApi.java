@@ -45,14 +45,14 @@ public class RateApi {
         if (!tourService.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(rateService.findByTourOrderByIdDesc(tourService.findById(id).get()));
+        return ResponseEntity.ok(rateService.findByToursOrderByIdDesc(tourService.findById(id).get()));
     }
     @PostMapping
     public ResponseEntity<Rate> post(@RequestBody Rate rate) {
         if (!userService.existsById(rate.getUser().getUserId())) {
             return ResponseEntity.notFound().build();
         }
-        if (!tourService.existsById(rate.getTour().getTourId())) {
+        if (!tourService.existsById(rate.getTours().getTourId())) {
             return ResponseEntity.notFound().build();
         }
         if (!bookDetailService.existsById(rate.getBookDetail().getBookDetailId())) {

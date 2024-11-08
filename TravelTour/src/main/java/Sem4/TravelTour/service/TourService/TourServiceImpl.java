@@ -1,7 +1,7 @@
 package Sem4.TravelTour.service.TourService;
 
 import Sem4.TravelTour.entity.Category;
-import Sem4.TravelTour.entity.Tour;
+import Sem4.TravelTour.entity.Tours;
 import Sem4.TravelTour.repository.TourRepository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,47 +19,51 @@ public class TourServiceImpl implements TourService {
         return tourRepository.existsById(id);
     }
     @Override
-    public List<Tour> getAll() {
+    public List<Tours> getAll() {
         return tourRepository.findByStatusTrue();
     }
     @Override
-    public Tour save(Tour tour) {
-        return tourRepository.save(tour);
+    public Tours save(Tours tours) {
+        return tourRepository.save(tours);
     }
     @Override
-    public List<Tour>  getBestSeller() {
+    public List<Tours>  getBestSeller() {
         return tourRepository.findByStatusTrueOrderBySoldDesc();
     }
     @Override
-    public List<Tour> getRate() {
+    public List<Tours> getRate() {
         return tourRepository.findTourRated();
     }
     @Override
-    public Optional<Tour> findById(Long id) {
+    public Optional<Tours> findById(Long id) {
         return tourRepository.findById(id);
     }
     @Override
-    public List<Tour> findByStatusTrue() {
+    public List<Tours> findByStatusTrue() {
         return tourRepository.findByStatusTrue();
     }
     @Override
-    public Tour findByTourIdAndStatusTrue(Long id) {return  tourRepository.findByTourIdAndStatusTrue(id);}
+    public Tours findByTourIdAndStatusTrue(Long id) {return  tourRepository.findByTourIdAndStatusTrue(id);}
     @Override
-    public List<Tour> findByStatusTrueOrderByQuantityDesc() {return tourRepository.findByStatusTrueOrderByQuantityDesc();}
+    public List<Tours> findByStatusTrueOrderByQuantityDesc() {return tourRepository.findByStatusTrueOrderByQuantityDesc();}
     @Override
-    public Tour getById(Long id) {
+    public Tours getById(Long id) {
         return tourRepository.getById(id);
     }
     @Override
-    public List<Tour> findByNameAndDuration(String name, int duration) {
+    public List<Tours> findByNameAndDuration(String name, int duration) {
         return tourRepository.findByNameAndDuration(name,duration);
     }
     @Override
-    public List<Tour> findByCategory(Category category) {
+    public List<Tours> findByCategory(Category category) {
         return tourRepository.findByCategory(category);
     }
     @Override
-    public List<Tour> findByStatusTrueOrderByEnteredDateDesc() {
+    public List<Tours> findByStatusTrueOrderByEnteredDateDesc() {
         return tourRepository.findByStatusTrueOrderByEnteredDateDesc();
+    }
+    @Override
+    public  List<Tours> findProductSuggest(Long id, Long id2, Long id3, Long id4){
+        return tourRepository.findProductSuggest(id,id2,id3,id4);
     }
 }

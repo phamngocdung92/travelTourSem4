@@ -75,7 +75,7 @@ public class BookApi {
         User user = userService.findByEmail(email).get();
         Book book = bookService.save(new Book (0L, new Date(), amount, cart.getAddress(), cart.getPhone(), 0, startDate, endDate, user));
         for (CartDetail i: items){
-            BookDetail bookDetail = new BookDetail(0L, i.getQuantity(), i.getPrice(),startDate, endDate,  i.getTour(), book);
+            BookDetail bookDetail = new BookDetail(0L, i.getQuantity(), i.getPrice(),startDate, endDate,  i.getTours(), book);
             bookDetailService.save(bookDetail);
         }
         for (CartDetail i : items){
@@ -121,11 +121,11 @@ public class BookApi {
     public void updateTour(Book book){
         List<BookDetail> listBookDetail = bookDetailService.findByBook(book);
         for(BookDetail bookDetail: listBookDetail){
-            Tour tour = tourService.findById(bookDetail.getTour().getTourId()).get();
-            if(tour != null){
-                tour.setQuantity(tour.getQuantity() - bookDetail.getQuantity());
-                tour.setSold(tour.getSold() + bookDetail.getQuantity());
-                tourService.save(tour);
+            Tours tours = tourService.findById(bookDetail.getTours().getTourId()).get();
+            if(tours != null){
+                tours.setQuantity(tours.getQuantity() - bookDetail.getQuantity());
+                tours.setSold(tours.getSold() + bookDetail.getQuantity());
+                tourService.save(tours);
             }
         }
     }

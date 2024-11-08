@@ -21,10 +21,10 @@ public class Location {
     private BigDecimal latitude;
     private BigDecimal longitude;
 
-//    @ManyToOne
-//    @JoinColumn(name = "category_Id", insertable = false, updatable = false)
+//    @ManyToMany
+//    @JoinColumn(name = "category_Id")
 //    private Category category;
-//
+
 //    @ManyToOne
 //    @JoinColumn(name = "tour_Id")
 //    private Tour tour;

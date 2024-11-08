@@ -13,7 +13,7 @@ public class ImageServiceImpl implements ImageService{
     private ImageRepository imageRepository;
     @Override
     public List<Image> findByTour_TourId(Long tourId) {
-        List<Image> images = imageRepository.findByTour_TourId(tourId);
+        List<Image> images = imageRepository.findByTours_TourId(tourId);
         return images;
     }
 }

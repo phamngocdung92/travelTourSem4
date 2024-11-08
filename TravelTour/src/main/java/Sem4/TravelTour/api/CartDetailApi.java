@@ -1,7 +1,7 @@
 package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.entity.CartDetail;
-import Sem4.TravelTour.entity.Tour;
+import Sem4.TravelTour.entity.Tours;
 import Sem4.TravelTour.service.CartService.CartDetailService;
 import Sem4.TravelTour.service.CartService.CartService;
 import Sem4.TravelTour.service.TourService.TourService;
@@ -40,14 +40,15 @@ public class CartDetailApi {
 
     @PostMapping()
     public ResponseEntity<CartDetail> post(@RequestBody CartDetail detail) {
-        if (!cartService.existsById(detail.getCart().getCartId())) {
+        if (  !cartService.existsById(detail.getCart().getCartId())) {
             return ResponseEntity.notFound().build();
         }
+
         boolean check = false;
-        List<Tour> listT = tourService.findByStatusTrue();
-        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTour().getTourId());
-        for (Tour t : listT) {
-            if (t.getTourId() == tour.getTourId()) {
+        List<Tours> listT = tourService.findByStatusTrue();
+        Tours tours = tourService.findByTourIdAndStatusTrue(detail.getTours().getTourId());
+        for (Tours t : listT) {
+            if (t.getTourId() == tours.getTourId()) {
                 check = true;
             }
         }
@@ -58,7 +59,7 @@ public class CartDetailApi {
         List<CartDetail> listD = cartDetailService
                 .findByCart(cartService.findById(detail.getCart().getCartId()).get());
         for (CartDetail item : listD) {
-            if (item.getTour().getTourId() == detail.getTour().getTourId()) {
+            if (item.getTours().getTourId() == detail.getTours().getTourId()) {
                 item.setQuantity(item.getQuantity() + 1);
                 item.setPrice(item.getPrice() + detail.getPrice());
                 return ResponseEntity.ok(cartDetailService.save(item));

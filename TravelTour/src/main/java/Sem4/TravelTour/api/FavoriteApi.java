@@ -1,7 +1,7 @@
 package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.entity.Favorite;
-import Sem4.TravelTour.entity.Tour;
+import Sem4.TravelTour.entity.Tours;
 import Sem4.TravelTour.entity.User;
 import Sem4.TravelTour.service.FavoriteService.FavoriteService;
 import Sem4.TravelTour.service.TourService.TourService;
@@ -33,7 +33,7 @@ public class FavoriteApi {
     @GetMapping("tour/{id}")
     public ResponseEntity<Integer> findByTour(@PathVariable("id") Long id){
         if(tourService.existsById(id)){
-            return ResponseEntity.ok(favoriteService.countByTour(tourService.getById(id).getTourId()));
+            return ResponseEntity.ok(favoriteService.countByTours(tourService.getById(id).getTourId()));
         }
         return ResponseEntity.notFound().build();
     }
@@ -41,9 +41,9 @@ public class FavoriteApi {
     public ResponseEntity<Favorite> findByTourAndUser(@PathVariable("tourId") Long tourId, @PathVariable("email") String email){
         if(userService.exsitsByEmail(email)){
             if(tourService.existsById(tourId)){
-                Tour tour = tourService.findById(tourId).get();
+                Tours tours = tourService.findById(tourId).get();
                 User user = userService.findByEmail(email).get();
-                return ResponseEntity.ok(favoriteService.findByTourAndUser(tour, user));
+                return ResponseEntity.ok(favoriteService.findByTourAndUser(tours, user));
             }
         }
         return ResponseEntity.notFound().build();
