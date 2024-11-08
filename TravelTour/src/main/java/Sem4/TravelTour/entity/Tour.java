@@ -1,5 +1,6 @@
 package Sem4.TravelTour.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,10 +34,17 @@ public class Tour implements Serializable {
     private Boolean status;
     private int duration;
     private int sold;
+    @Column(name = "time_id")
+    private int timeId;
 
     @ManyToOne
     @JoinColumn(name = "category_Id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    @JsonIgnore
+    private Location location;
 
 //    @OneToMany(mappedBy = "tour")
 //    private Set<Location> locations;
@@ -70,7 +78,9 @@ public class Tour implements Serializable {
                 ", status=" + status +
                 ", duration=" + duration +
                 ", sold=" + sold +
+                ", timeId=" + timeId +
                 ", category=" + category +
+                ", location=" + location +
                 '}';
     }
 

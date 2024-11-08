@@ -1,8 +1,11 @@
 package Sem4.TravelTour.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Location")
@@ -10,7 +13,8 @@ public class Location {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer locationId;
+    @Column(name = "location_id")
+    private Long locationId;
 
     @Column(nullable = false)
     private String name;
@@ -21,6 +25,17 @@ public class Location {
     private BigDecimal latitude;
     private BigDecimal longitude;
 
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<Tour> tours;
+    public Location() {}
+
+    public Location(String name, String description, BigDecimal latitude, BigDecimal longitude) {
+        this.name = name;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 //    @ManyToOne
 //    @JoinColumn(name = "category_Id", insertable = false, updatable = false)
 //    private Category category;
@@ -37,11 +52,11 @@ public class Location {
 
     // Getters and Setters
 
-    public Integer getLocationId() {
+    public Long getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(Integer locationId) {
+    public void setLocationId(Long locationId) {
         this.locationId = locationId;
     }
 
@@ -75,5 +90,12 @@ public class Location {
 
     public void setLongitude(BigDecimal longitude) {
         this.longitude = longitude;
+    }
+    public List<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(List<Tour> tours) {
+        this.tours = tours;
     }
 }

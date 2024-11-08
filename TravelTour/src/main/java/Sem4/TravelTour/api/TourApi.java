@@ -1,6 +1,7 @@
 package Sem4.TravelTour.api;
 
 import Sem4.TravelTour.dto.CloseTourDto;
+import Sem4.TravelTour.dto.FindTourByLocationDto;
 import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Image;
 import Sem4.TravelTour.entity.Tour;
@@ -123,5 +124,12 @@ public class TourApi {
         List<String> imageUrls = images.stream().map(Image::getImageUrl).collect(Collectors.toList());
         return ResponseEntity.ok(imageUrls);
     }
-
+    @GetMapping("findTourByLocationId/{id}")
+    public ResponseEntity<List<Tour>> findTourByLocationId(@PathVariable("id") Long id){
+        return ResponseEntity.ok(tourService.findTourByLocationId(id));
+    }
+    @PostMapping("findTourByParams")
+    public ResponseEntity<List<Tour>> findTourByParams(@RequestBody FindTourByLocationDto dto){
+        return ResponseEntity.ok(tourService.findTourByParams(dto));
+    }
 }

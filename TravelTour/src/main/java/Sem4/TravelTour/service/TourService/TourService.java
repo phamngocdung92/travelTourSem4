@@ -1,5 +1,6 @@
 package Sem4.TravelTour.service.TourService;
 
+import Sem4.TravelTour.dto.FindTourByLocationDto;
 import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
 
@@ -21,4 +22,6 @@ public interface TourService {
     List<Tour> findByNameAndDuration(String name,int duration);
     List<Tour> findByCategory(Category category);
     List<Tour> findByStatusTrueOrderByEnteredDateDesc();
+    List<Tour> findTourByLocationId(Long locationId);
+    List<Tour> findTourByParams(FindTourByLocationDto dto);
 }

@@ -27,5 +27,8 @@ public interface TourRepository extends JpaRepository<Tour, Long>
     List<Tour> findByNameAndDuration(@Param("name") String name, @Param("duration") int duration);
     List<Tour> findByCategory(Category category);
     List<Tour> findByStatusTrueOrderByEnteredDateDesc();
-
+    List<Tour> findByLocation_LocationId(Long locationId);
+    //find tour by params
+    @Query("SELECT td FROM Tour td JOIN td.location ld WHERE LOWER(REPLACE(ld.name, ' ', '')) LIKE LOWER(CONCAT(REPLACE(:locationName, ' ', ''), '%')) AND td.duration = :duration")
+    List<Tour> findTourByParams(@Param("locationName") String locationName, @Param("duration") int duration);
 }

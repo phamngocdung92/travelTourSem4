@@ -1,11 +1,14 @@
 package Sem4.TravelTour.service.TourService;
 
+import Sem4.TravelTour.dto.FindTourByLocationDto;
 import Sem4.TravelTour.entity.Category;
 import Sem4.TravelTour.entity.Tour;
 import Sem4.TravelTour.repository.TourRepository.TourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -61,5 +64,21 @@ public class TourServiceImpl implements TourService {
     @Override
     public List<Tour> findByStatusTrueOrderByEnteredDateDesc() {
         return tourRepository.findByStatusTrueOrderByEnteredDateDesc();
+    }
+    @Override
+    public List<Tour> findTourByLocationId(Long locationId) {
+        return tourRepository.findByLocation_LocationId(locationId);
+    }
+    @Override
+    public List<Tour> findTourByParams(FindTourByLocationDto dto) {
+        String locationName = dto.getLocationName();
+//        Date startDate = dto.getStartDate();
+        int duration = dto.getDuration();
+        //format startDate to int yyyymmdd
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+//        String stringDate = dateFormat.format(startDate);
+//        int formattedDate = Integer.parseInt(stringDate);
+
+        return tourRepository.findTourByParams(locationName, duration);
     }
 }
