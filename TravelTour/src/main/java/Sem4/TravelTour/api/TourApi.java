@@ -11,9 +11,11 @@ import Sem4.TravelTour.service.ImageService.ImageService;
 import Sem4.TravelTour.service.TourService.TourService;
 import Sem4.TravelTour.service.TourService.TourStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -138,19 +140,20 @@ public class TourApi {
         return ResponseEntity.ok(tourService.findTourByParams(dto));
     }
     @PostMapping("addTourImage/{id}")
-    public ResponseEntity<List<String>>  addTourImage(@PathVariable Long id, @RequestBody List<String> imageUrls){
-        if (!tourService.existsById(id)) {
-            return ResponseEntity.notFound().build();
+    public ResponseEntity<List<String>> addTourImage(@PathVariable Long id, @RequestBody List<String> imageUrls) {
+        if (tourService.existsById(id)) {
+            // Existing tour: Add images to the specified tour
+            List<Image> images = imageService.addImagesToTour(id, imageUrls);
+
+            List<String> imageUrlsList = images.stream()
+                    .map(Image::getImageUrl)
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(imageUrlsList);
+        } else {
+            // New tour (id == 0): Return a message indicating images can't be added
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Arrays.asList("Cannot add image URLs to a non-existent tour. Please create the tour first."));
         }
-        // Add images to the specified tour
-        List<Image> images = imageService.addImagesToTour(id, imageUrls);
-
-        // Convert the list of images to a list of image URLs
-        List<String> imageUrlsList = images.stream()
-                .map(Image::getImageUrl)
-                .collect(Collectors.toList());
-
-        // Return the list of image URLs to the frontend
-        return ResponseEntity.ok(imageUrlsList);
     }
 }
