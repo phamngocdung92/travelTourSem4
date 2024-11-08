@@ -52,17 +52,22 @@ public class TourApi {
         }
         return ResponseEntity.ok(tourService.findById(id).get());
     }
+    @GetMapping("suggest/{categoryId}/{productId}")
+    public ResponseEntity<List<Tour>> suggest(@PathVariable("categoryId") Long categoryId,
+                                                 @PathVariable("productId") Long productId) {
+        return ResponseEntity.ok(tourService.findProductSuggest(categoryId, productId, categoryId, categoryId));
+    }
     @PostMapping
-    public ResponseEntity<Tour> post(@RequestBody Tour tour) {
+    public ResponseEntity<Tour> post(@RequestBody Tour tours) {
 //        if (tourService.existsById(tour.getTourId())) {
 //            return ResponseEntity.badRequest().build();
 //        }
-        return ResponseEntity.ok(tourService.save(tour));
+        return ResponseEntity.ok(tourService.save(tours));
     }
     @PutMapping("{id}")
-    public ResponseEntity<Tour> put(@PathVariable("id") Long id, @RequestBody Tour tour) {
-        if (!id.equals(tour.getTourId())) {
-            return ResponseEntity.badRequest().build();
+    public ResponseEntity<Tour> put(@PathVariable("id") Long id, @RequestBody Tour tour   ) {
+        if (!id.equals(tour.getTourId())){
+            return ResponseEntity.notFound().build();
         }
         if (!tourService.existsById(id)) {
             return ResponseEntity.notFound().build();
@@ -75,7 +80,7 @@ public class TourApi {
             return ResponseEntity.notFound().build();
         }
         Tour t = tourService.findById(id).get();
-        t.setStatus(false);
+        t.setStatus(true);
         tourService.save(t);
         return ResponseEntity.ok().build();
     }

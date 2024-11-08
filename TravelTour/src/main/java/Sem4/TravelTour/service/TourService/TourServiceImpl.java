@@ -81,4 +81,8 @@ public class TourServiceImpl implements TourService {
 
         return tourRepository.findTourByParams(locationName, duration);
     }
+    @Override
+    public  List<Tour> findProductSuggest(Long id, Long id2, Long id3, Long id4){
+        return tourRepository.findProductSuggest(id,id2,id3,id4);
+    }
 }

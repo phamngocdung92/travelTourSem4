@@ -40,12 +40,13 @@ public class CartDetailApi {
 
     @PostMapping()
     public ResponseEntity<CartDetail> post(@RequestBody CartDetail detail) {
-        if (!cartService.existsById(detail.getCart().getCartId())) {
+        if (  !cartService.existsById(detail.getCart().getCartId())) {
             return ResponseEntity.notFound().build();
         }
+
         boolean check = false;
         List<Tour> listT = tourService.findByStatusTrue();
-        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTour().getTourId());
+        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTours().getTourId());
         for (Tour t : listT) {
             if (t.getTourId() == tour.getTourId()) {
                 check = true;
@@ -58,7 +59,7 @@ public class CartDetailApi {
         List<CartDetail> listD = cartDetailService
                 .findByCart(cartService.findById(detail.getCart().getCartId()).get());
         for (CartDetail item : listD) {
-            if (item.getTour().getTourId() == detail.getTour().getTourId()) {
+            if (item.getTours().getTourId() == detail.getTours().getTourId()) {
                 item.setQuantity(item.getQuantity() + 1);
                 item.setPrice(item.getPrice() + detail.getPrice());
                 return ResponseEntity.ok(cartDetailService.save(item));

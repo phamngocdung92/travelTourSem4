@@ -24,4 +24,5 @@ public interface TourService {
     List<Tour> findByStatusTrueOrderByEnteredDateDesc();
     List<Tour> findTourByLocationId(Long locationId);
     List<Tour> findTourByParams(FindTourByLocationDto dto);
+    List<Tour> findProductSuggest(Long id, Long id2, Long id3, Long id4);
 }

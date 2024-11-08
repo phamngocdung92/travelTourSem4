@@ -15,3 +15,4 @@ public interface RateRepository extends JpaRepository<Rate, Long> {
     List<Rate> findByTourOrderByIdDesc(Tour tour);
     Rate save(Rate rate);
 }
+//findByToursOrderByIdDesc
