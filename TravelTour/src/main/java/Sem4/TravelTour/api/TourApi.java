@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -109,10 +110,14 @@ public class TourApi {
     }
     @GetMapping("getClosedTourById/{id}")
     public ResponseEntity<List<TourStatus>> getClosedTourById(@PathVariable("id") Long id){
-        if(!tourStatusService.existsById(id)){
+        if(!tourService.existsById(id)){
             return ResponseEntity.notFound().build();
         }
         List<TourStatus> ts = tourStatusService.findBytourIdAndStatusFalse(id);
+        if (ts.isEmpty()) {
+            // Optionally, add a message to the response body if needed
+            return ResponseEntity.ok(Collections.emptyList());
+        }
         return ResponseEntity.ok(ts);
     }
     @GetMapping("getTourImages/{id}")
@@ -131,5 +136,21 @@ public class TourApi {
     @PostMapping("findTourByParams")
     public ResponseEntity<List<Tour>> findTourByParams(@RequestBody FindTourByLocationDto dto){
         return ResponseEntity.ok(tourService.findTourByParams(dto));
+    }
+    @PostMapping("addTourImage/{id}")
+    public ResponseEntity<List<String>>  addTourImage(@PathVariable Long id, @RequestBody List<String> imageUrls){
+        if (!tourService.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        // Add images to the specified tour
+        List<Image> images = imageService.addImagesToTour(id, imageUrls);
+
+        // Convert the list of images to a list of image URLs
+        List<String> imageUrlsList = images.stream()
+                .map(Image::getImageUrl)
+                .collect(Collectors.toList());
+
+        // Return the list of image URLs to the frontend
+        return ResponseEntity.ok(imageUrlsList);
     }
 }
