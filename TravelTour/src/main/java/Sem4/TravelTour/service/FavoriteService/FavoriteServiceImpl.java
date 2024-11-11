@@ -21,8 +21,8 @@ public class FavoriteServiceImpl implements FavoriteService{
         return favoriteRepository.findByUser(user);
     }
     @Override
-    public Integer countByTour(Long id) {
-        return favoriteRepository.countByTour(id);
+    public Integer countByTour(Tour tour) {
+        return favoriteRepository.countByTour(tour);
     }
     @Override
     public Favorite findByTourAndUser(Tour tour, User user) {

@@ -33,7 +33,7 @@ public class FavoriteApi {
     @GetMapping("tour/{id}")
     public ResponseEntity<Integer> findByTour(@PathVariable("id") Long id){
         if(tourService.existsById(id)){
-            return ResponseEntity.ok(favoriteService.countByTour(tourService.getById(id).getTourId()));
+            return ResponseEntity.ok(favoriteService.countByTour(tourService.getById(id)));
         }
         return ResponseEntity.notFound().build();
     }

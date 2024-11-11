@@ -36,7 +36,7 @@ public interface TourRepository extends JpaRepository<Tour, Long>
             + "Where (t.category_id = ?) and (t.tour_id != ?)\r\n"
             + "group by t.tour_id , t.name)\r\n"
             + "union\r\n"
-            + "(Select p.*, avg(r.rating) Rate From tours t \r\n"
+            + "(Select t.*, avg(r.rating) Rate From tours t \r\n"
             + "left join rates r on t.tour_id = r.tour_id\r\n"
             + "Where t.category_id != ?\r\n"
             + "group by t.tour_id , t.name)\r\n"
