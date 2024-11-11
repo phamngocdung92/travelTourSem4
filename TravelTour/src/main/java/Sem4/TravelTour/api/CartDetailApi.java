@@ -46,7 +46,7 @@ public class CartDetailApi {
 
         boolean check = false;
         List<Tour> listT = tourService.findByStatusTrue();
-        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTours().getTourId());
+        Tour tour = tourService.findByTourIdAndStatusTrue(detail.getTour().getTourId());
         for (Tour t : listT) {
             if (t.getTourId() == tour.getTourId()) {
                 check = true;
@@ -59,7 +59,7 @@ public class CartDetailApi {
         List<CartDetail> listD = cartDetailService
                 .findByCart(cartService.findById(detail.getCart().getCartId()).get());
         for (CartDetail item : listD) {
-            if (item.getTours().getTourId() == detail.getTours().getTourId()) {
+            if (item.getTour().getTourId() == detail.getTour().getTourId()) {
                 item.setQuantity(item.getQuantity() + 1);
                 item.setPrice(item.getPrice() + detail.getPrice());
                 return ResponseEntity.ok(cartDetailService.save(item));
