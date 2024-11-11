@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @SuppressWarnings("serial")
 @Data
@@ -20,6 +21,10 @@ public class CartDetail implements Serializable {
     private Long cartDetailId;
     private int quantity;
     private Double price;
+    @Column(name = "start_date")
+    private Date start_date;
+    @Column(name = "end_date")
+    private Date end_date;
 
     @ManyToOne
     @JoinColumn(name = "tourId")
