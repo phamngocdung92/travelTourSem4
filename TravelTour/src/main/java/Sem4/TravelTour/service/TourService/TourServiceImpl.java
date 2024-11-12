@@ -8,9 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+
 @Service
 public class TourServiceImpl implements TourService {
     @Autowired
@@ -84,5 +83,24 @@ public class TourServiceImpl implements TourService {
     @Override
     public  List<Tour> findProductSuggest(Long id, Long id2, Long id3, Long id4){
         return tourRepository.findProductSuggest(id,id2,id3,id4);
+    }
+    @Override
+    public List<Tour> findByCategories(List<Category> categories) {
+        return tourRepository.findByCategoriesIn(categories);
+    }
+    @Override
+    public List<Tour> findByCategoryIncludingOldAndNew(Long categoryId) {
+        // Tìm từ bảng tour_categories (mới)
+        List<Tour> toursFromNewTable = tourRepository.findByCategoryNew(categoryId);
+
+        // Tìm từ bảng category_tour (cũ)
+        List<Tour> toursFromOldTable = tourRepository.findByCategoryOld(categoryId);
+
+        // Kết hợp các kết quả và loại bỏ trùng lặp
+        Set<Tour> allTours = new HashSet<>();
+        allTours.addAll(toursFromNewTable);
+        allTours.addAll(toursFromOldTable);
+
+        return new ArrayList<>(allTours);
     }
 }

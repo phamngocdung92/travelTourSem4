@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Set;
 
 
 @SuppressWarnings("serial")
@@ -43,6 +44,14 @@ public class Tour implements Serializable {
     @JoinColumn(name = "location_id")
     @JsonIgnore
     private Location location;
+
+    @ManyToMany
+    @JoinTable(
+    name = "tour_categories",
+    joinColumns = @JoinColumn(name = "tour_id"),
+    inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Category> categories;
 
 //    @OneToMany(mappedBy = "tour")
 //    private Set<Location> locations;

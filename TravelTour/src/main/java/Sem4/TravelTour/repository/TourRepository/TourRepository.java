@@ -43,4 +43,9 @@ public interface TourRepository extends JpaRepository<Tour, Long>
             + "Order by category_id = ? desc, Rate desc", nativeQuery = true)
     List<Tour> findProductSuggest(Long id, Long id2, Long id3, Long id4);
 
+    List<Tour> findByCategoriesIn(List<Category> categories);
+    @Query("SELECT t FROM Tour t JOIN Category c ON t.category.categoryId = c.categoryId WHERE c.categoryId = :categoryId")
+    List<Tour> findByCategoryOld(@Param("categoryId") Long categoryId);
+    @Query("SELECT t FROM Tour t JOIN TourCategory tc ON t.tourId = tc.tour.tourId WHERE tc.category.categoryId = :categoryId")
+    List<Tour> findByCategoryNew(@Param("categoryId") Long categoryId);
 }

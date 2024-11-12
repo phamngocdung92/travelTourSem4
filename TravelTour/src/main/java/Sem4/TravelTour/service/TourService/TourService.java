@@ -25,4 +25,6 @@ public interface TourService {
     List<Tour> findTourByLocationId(Long locationId);
     List<Tour> findTourByParams(FindTourByLocationDto dto);
     List<Tour> findProductSuggest(Long id, Long id2, Long id3, Long id4);
+    List<Tour> findByCategories(List<Category> categories);
+    public List<Tour> findByCategoryIncludingOldAndNew(Long categoryId);
 }

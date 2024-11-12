@@ -89,13 +89,22 @@ public class TourApi {
     public ResponseEntity<List<Tour>> search(@RequestParam("name") String name, @RequestParam("duration") int duration) {
         return ResponseEntity.ok(tourService.findByNameAndDuration(name, duration));
     }
+//    @GetMapping("category/{id}")
+//    public ResponseEntity<List<Tour>> getByCategory(@PathVariable("id") Long id) {
+//        if(!categoryService.existsById(id)){
+//            return ResponseEntity.notFound().build();
+//        }
+//        Category c = categoryService.findById(id).get();
+//        return ResponseEntity.ok(tourService.findByCategory(c));
+//    }
+
     @GetMapping("category/{id}")
     public ResponseEntity<List<Tour>> getByCategory(@PathVariable("id") Long id) {
         if(!categoryService.existsById(id)){
             return ResponseEntity.notFound().build();
         }
-        Category c = categoryService.findById(id).get();
-        return ResponseEntity.ok(tourService.findByCategory(c));
+        Long c = categoryService.findById(id).get().getCategoryId();
+        return ResponseEntity.ok(tourService.findByCategoryIncludingOldAndNew(c));
     }
     @GetMapping("latest")
     public ResponseEntity<List<Tour>> getLatest() {
@@ -160,5 +169,15 @@ public class TourApi {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(Arrays.asList("Cannot add image URLs to a non-existent tour. Please create the tour first."));
         }
+    }
+    @GetMapping("categories")
+    public ResponseEntity<List<Tour>> getByCategories(@RequestParam("ids") List<Long> ids) {
+        List<Category> categories = categoryService.findAllByIds(ids);
+
+        if (categories.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(tourService.findByCategories(categories));
     }
 }
