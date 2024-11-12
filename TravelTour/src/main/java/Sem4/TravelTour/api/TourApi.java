@@ -80,7 +80,7 @@ public class TourApi {
             return ResponseEntity.notFound().build();
         }
         Tour t = tourService.findById(id).get();
-        t.setStatus(true);
+        t.setStatus(false);
         tourService.save(t);
         return ResponseEntity.ok().build();
     }

@@ -131,7 +131,11 @@ public class UserApi {
     }
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
-
+           User u = userService.findByEmail(loginRequest.getEmail()).get();
+           Boolean status = u.getStatus();
+          if(!status){
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Account is blocked!"));
+          }
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
